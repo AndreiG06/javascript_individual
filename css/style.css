@@ -1,0 +1,347 @@
+/* === Базовые стили === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-2: #334155;
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --warn: #f59e0b;
+    --border: #475569;
+    --radius: 10px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e1b4b);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.app-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+.subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+}
+
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* === Вкладки === */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+}
+.tab {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    color: var(--text-dim);
+    padding: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.tab:hover {
+    background: var(--surface-2);
+    color: var(--text);
+}
+.tab--active {
+    color: var(--text);
+    border-bottom: 2px solid var(--primary);
+}
+
+.panel {
+    display: none;
+    padding: 1.5rem;
+}
+.panel--active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Поле вывода пароля === */
+.output-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.password-output {
+    flex: 1;
+    padding: 0.85rem 1rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: "Consolas", monospace;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+}
+.password-output:focus {
+    outline: 2px solid var(--primary);
+}
+
+/* === Индикатор надёжности === */
+.strength {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+.strength__bar {
+    flex: 1;
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.strength__fill {
+    height: 100%;
+    width: 0%;
+    background: var(--text-dim);
+    transition: width 0.3s, background 0.3s;
+}
+.strength__fill--weak   { background: var(--danger);  width: 33%;  }
+.strength__fill--medium { background: var(--warn);    width: 66%;  }
+.strength__fill--strong { background: var(--success); width: 100%; }
+.strength__label {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    min-width: 80px;
+    text-align: right;
+}
+
+/* === Поля и контролы === */
+.field {
+    margin-bottom: 1rem;
+}
+.field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+}
+.field input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+}
+.field input[type="number"],
+.history-controls input,
+.history-controls select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+}
+.field input[type="number"]:focus,
+.history-controls input:focus,
+.history-controls select:focus {
+    outline: 2px solid var(--primary);
+}
+
+.options {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+.options legend {
+    padding: 0 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+.options input[type="checkbox"] {
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.25rem;
+    min-height: 1.1em;
+}
+
+/* === Кнопки === */
+.btn {
+    border: 0;
+    border-radius: var(--radius);
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.05s;
+    color: var(--text);
+}
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+    background: var(--primary);
+    width: 100%;
+    font-weight: 600;
+}
+.btn--primary:hover { background: var(--primary-hover); }
+
+.btn--icon {
+    background: var(--surface-2);
+    padding: 0.75rem 0.9rem;
+    font-size: 1.1rem;
+}
+.btn--icon:hover { background: var(--border); }
+
+.btn--danger {
+    background: var(--danger);
+}
+.btn--danger:hover { background: #dc2626; }
+
+/* === История === */
+.history-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.history-controls input {
+    grid-column: 1 / -1;
+}
+
+.history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 360px;
+    overflow-y: auto;
+}
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    animation: slideIn 0.25s ease;
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+.history-item__pwd {
+    flex: 1;
+    font-family: "Consolas", monospace;
+    word-break: break-all;
+    font-size: 0.9rem;
+}
+.history-item__meta {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+.badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+.badge--weak   { background: var(--danger);  }
+.badge--medium { background: var(--warn);   }
+.badge--strong { background: var(--success); }
+
+.history-item__actions {
+    display: flex;
+    gap: 0.25rem;
+}
+.icon-btn {
+    background: transparent;
+    border: 0;
+    color: var(--text-dim);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+}
+.icon-btn:hover {
+    color: var(--text);
+    background: var(--surface-2);
+}
+
+.empty {
+    text-align: center;
+    color: var(--text-dim);
+    padding: 2rem 1rem;
+    font-size: 0.95rem;
+}
+
+/* === Уведомления (toast) === */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+}
+.toast--show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.toast--error   { background: var(--danger);  }
+.toast--success { background: var(--success); }
+
+/* === Адаптив === */
+@media (max-width: 480px) {
+    body { padding: 1rem 0.5rem; }
+    .app-header h1 { font-size: 1.5rem; }
+    .panel { padding: 1rem; }
+    .history-controls { grid-template-columns: 1fr; }
+}
