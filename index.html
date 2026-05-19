@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Генератор паролей</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header class="app-header">
+        <h1>🔐 Генератор паролей</h1>
+        <p class="subtitle">Безопасные пароли в один клик</p>
+    </header>
+
+    <main class="container">
+        <!-- Вкладки -->
+        <nav class="tabs" role="tablist">
+            <button class="tab tab--active" data-tab="generator" role="tab">Генератор</button>
+            <button class="tab" data-tab="history" role="tab">История</button>
+        </nav>
+
+        <!-- Панель генератора -->
+        <section id="generator" class="panel panel--active" role="tabpanel">
+            <form id="generator-form" class="generator">
+                <div class="output-group">
+                    <input
+                        type="text"
+                        id="password-output"
+                        class="password-output"
+                        readonly
+                        placeholder="Здесь появится ваш пароль"
+                    />
+                    <button type="button" id="copy-btn" class="btn btn--icon" title="Копировать">📋</button>
+                </div>
+
+                <div class="strength">
+                    <div class="strength__bar">
+                        <div id="strength-fill" class="strength__fill"></div>
+                    </div>
+                    <span id="strength-label" class="strength__label">—</span>
+                </div>
+
+                <div class="field">
+                    <label for="length">
+                        Длина: <span id="length-value">16</span>
+                    </label>
+                    <input type="range" id="length" min="4" max="64" value="16" />
+                </div>
+
+                <div class="field">
+                    <label for="length-input">Точная длина (4–64):</label>
+                    <input type="number" id="length-input" min="4" max="64" value="16" />
+                    <small id="length-error" class="error"></small>
+                </div>
+
+                <fieldset class="options">
+                    <legend>Включить символы:</legend>
+                    <label><input type="checkbox" id="opt-upper" checked /> Заглавные (A–Z)</label>
+                    <label><input type="checkbox" id="opt-lower" checked /> Строчные (a–z)</label>
+                    <label><input type="checkbox" id="opt-digits" checked /> Цифры (0–9)</label>
+                    <label><input type="checkbox" id="opt-symbols" /> Спецсимволы (!@#$…)</label>
+                    <label><input type="checkbox" id="opt-exclude-similar" /> Исключить похожие (l, 1, I, O, 0)</label>
+                    <small id="options-error" class="error"></small>
+                </fieldset>
+
+                <button type="submit" class="btn btn--primary">Сгенерировать</button>
+            </form>
+        </section>
+
+        <!-- Панель истории -->
+        <section id="history" class="panel" role="tabpanel">
+            <div class="history-controls">
+                <input type="search" id="search" placeholder="🔍 Поиск по паролю..." />
+                <select id="sort">
+                    <option value="date-desc">Сначала новые</option>
+                    <option value="date-asc">Сначала старые</option>
+                    <option value="strength-desc">По надёжности ↓</option>
+                    <option value="strength-asc">По надёжности ↑</option>
+                    <option value="length-desc">По длине ↓</option>
+                    <option value="length-asc">По длине ↑</option>
+                </select>
+                <select id="filter">
+                    <option value="all">Все</option>
+                    <option value="weak">Слабые</option>
+                    <option value="medium">Средние</option>
+                    <option value="strong">Надёжные</option>
+                </select>
+                <button id="clear-history" class="btn btn--danger">Очистить</button>
+            </div>
+
+            <ul id="history-list" class="history-list"></ul>
+            <p id="history-empty" class="empty">История пуста — сгенерируйте свой первый пароль 👆</p>
+        </section>
+    </main>
+
+    <!-- Уведомления (toast) -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
